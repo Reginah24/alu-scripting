@@ -1,12 +1,25 @@
+#!/usr/bin/python3
+"""
+Module for querying Reddit API to get top 10 hot posts from a subreddit.
+
+This module provides a function to fetch and display the titles of the
+first 10 hot posts from a given subreddit. It handles invalid subreddits
+and API errors gracefully.
+"""
+
 import requests
+import sys
 
 def top_ten(subreddit):
     """
     Queries the Reddit API and prints the titles of the first 10 hot posts
     for a given subreddit.
-    
+
     Args:
         subreddit (str): The name of the subreddit to query
+
+    Returns:
+        None: If the subreddit is invalid or an error occurs
     """
     # Reddit API endpoint
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
@@ -46,3 +59,10 @@ def top_ten(subreddit):
     except Exception as e:
         print(None)
         return
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        top_ten(sys.argv[1])
+
